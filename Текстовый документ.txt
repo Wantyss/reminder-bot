@@ -1,0 +1,8 @@
+Cтек:
+Python 3.12
+
+aiogram 3
+
+aiosqlite
+
+aiohttp-socks (для работы через прокси)
