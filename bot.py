@@ -12,21 +12,21 @@ from database import (
     delete_reminder, get_due_reminders, delete_by_id
 )
 
-BOT_TOKEN = "8883377438:AAGDG-BxWCivxK3Xlu0dBnl53mKGXjx5B_o"
+BOT_TOKEN = "добавьсвойтокен"
 
-# 🔌 Прокси через v2RayTun
+
 session = AiohttpSession(proxy="socks5://127.0.0.1:10808")
 bot = Bot(token=BOT_TOKEN, session=session)
 dp = Dispatcher()
 
 
-# ---------- Состояния для пошагового ввода ----------
+
 class AddReminder(StatesGroup):
     waiting_text = State()
     waiting_time = State()
 
 
-# ---------- /start ----------
+
 @dp.message(Command("start"))
 async def cmd_start(message: Message):
     keyboard = InlineKeyboardMarkup(inline_keyboard=[
@@ -44,7 +44,7 @@ async def cmd_start(message: Message):
     )
 
 
-# ---------- /add ----------
+
 @dp.message(Command("add"))
 async def cmd_add(message: Message, state: FSMContext):
     await state.set_state(AddReminder.waiting_text)
@@ -109,7 +109,7 @@ async def process_time(message: Message, state: FSMContext):
     )
 
 
-# ---------- /list ----------
+
 @dp.message(Command("list"))
 async def cmd_list(message: Message):
     reminders = await get_user_reminders(message.from_user.id)
@@ -126,7 +126,7 @@ async def cmd_list(message: Message):
     await message.answer(text)
 
 
-# ---------- /delete ----------
+
 @dp.message(Command("delete"))
 async def cmd_delete(message: Message):
     parts = message.text.split(maxsplit=1)
@@ -141,7 +141,7 @@ async def cmd_delete(message: Message):
         await message.answer("Не нашёл такое напоминание.")
 
 
-# ---------- Кнопки ----------
+
 @dp.callback_query(F.data == "add")
 async def cb_add(callback: CallbackQuery, state: FSMContext):
     await callback.message.answer("Что напомнить? Напиши текст.")
@@ -155,7 +155,7 @@ async def cb_list(callback: CallbackQuery):
     await callback.answer()
 
 
-# ---------- Фоновая задача ----------
+
 async def reminder_checker():
     while True:
         try:
@@ -174,7 +174,7 @@ async def reminder_checker():
         await asyncio.sleep(30)
 
 
-# ---------- Запуск ----------
+
 async def main():
     await init_db()
     asyncio.create_task(reminder_checker())
