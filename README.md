@@ -16,7 +16,7 @@ Telegram-бот для напоминаний на Python (aiogram 3).
 1. Получи токен у [@BotFather](https://t.me/BotFather)
 2. Скопируй проект:
    ```bash
-   git clone https://github.com/ТВОЙ_НИК/reminder-bot.git
+   git clone https://github.com/Wantyss/reminder-bot.git
    cd reminder-bot
 3. Создай файл `requirements.txt`
 
